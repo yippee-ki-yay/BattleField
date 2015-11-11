@@ -1,0 +1,9 @@
+c:\users\korisnik\documents\visual studio 2013\Projects\BattleField3.9\BattleField3.9\bin\Debug\BattleField3.9.exe.config
+c:\users\korisnik\documents\visual studio 2013\Projects\BattleField3.9\BattleField3.9\bin\Debug\BattleField3.9.exe
+c:\users\korisnik\documents\visual studio 2013\Projects\BattleField3.9\BattleField3.9\bin\Debug\BattleField3.9.pdb
+c:\users\korisnik\documents\visual studio 2013\Projects\BattleField3.9\BattleField3.9\obj\Debug\BattleField3.9.csprojResolveAssemblyReference.cache
+c:\users\korisnik\documents\visual studio 2013\Projects\BattleField3.9\BattleField3.9\obj\Debug\BattleField3._9.Properties.Resources.resources
+c:\users\korisnik\documents\visual studio 2013\Projects\BattleField3.9\BattleField3.9\obj\Debug\BattleField3.9.csproj.GenerateResource.Cache
+c:\users\korisnik\documents\visual studio 2013\Projects\BattleField3.9\BattleField3.9\obj\Debug\BattleField3.9.exe
+c:\users\korisnik\documents\visual studio 2013\Projects\BattleField3.9\BattleField3.9\obj\Debug\BattleField3.9.pdb
+C:\Users\korisnik\Documents\Visual Studio 2013\Projects\BattleField3.9\BattleField3.9\obj\Debug\BattleField3._9.MainForm.resources
