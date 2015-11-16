@@ -41,21 +41,25 @@
             this.openglControl.BackColor = System.Drawing.Color.Black;
             this.openglControl.ColorBits = ((byte)(32));
             this.openglControl.DepthBits = ((byte)(16));
+            this.openglControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.openglControl.Location = new System.Drawing.Point(0, 0);
             this.openglControl.Name = "openglControl";
-            this.openglControl.Size = new System.Drawing.Size(284, 263);
+            this.openglControl.Size = new System.Drawing.Size(763, 498);
             this.openglControl.StencilBits = ((byte)(0));
             this.openglControl.TabIndex = 0;
             this.openglControl.Paint += new System.Windows.Forms.PaintEventHandler(this.openglControl_Paint);
+            this.openglControl.KeyDown += new System.Windows.Forms.KeyEventHandler(this.openglControl_KeyDown);
+            this.openglControl.Resize += new System.EventHandler(this.openglControl_Resize);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 262);
+            this.ClientSize = new System.Drawing.Size(763, 498);
             this.Controls.Add(this.openglControl);
             this.Name = "MainForm";
             this.Text = "Battle Field 3.9";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.ResumeLayout(false);
 
         }

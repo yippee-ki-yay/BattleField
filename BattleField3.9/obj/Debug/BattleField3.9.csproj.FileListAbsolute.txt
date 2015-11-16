@@ -7,3 +7,4 @@ c:\users\korisnik\documents\visual studio 2013\Projects\BattleField3.9\BattleFie
 c:\users\korisnik\documents\visual studio 2013\Projects\BattleField3.9\BattleField3.9\obj\Debug\BattleField3.9.exe
 c:\users\korisnik\documents\visual studio 2013\Projects\BattleField3.9\BattleField3.9\obj\Debug\BattleField3.9.pdb
 C:\Users\korisnik\Documents\Visual Studio 2013\Projects\BattleField3.9\BattleField3.9\obj\Debug\BattleField3._9.MainForm.resources
+C:\Users\korisnik\Documents\Visual Studio 2013\Projects\BattleField3.9\BattleField3.9\bin\Debug\AssimpNet.dll
