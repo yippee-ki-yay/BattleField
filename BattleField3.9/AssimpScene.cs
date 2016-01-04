@@ -209,7 +209,7 @@ namespace BattleField3._9
                                 Gl.glColor3f(0.3f, 0.3f, 0.3f);
                             else
                                 Gl.glColor3f(0.4f, 0.4f, 0.4f);
-                            
+
                             // Generisanje boje poligona pomoću generatora slučajnih brojeva
                             //float blue = (float)m_random.NextDouble();
 
@@ -248,7 +248,7 @@ namespace BattleField3._9
             //}
 
             // Oslobodi unmanaged resurse.
-           // Gl.glDeleteLists(m_modelDL, 1);
+            Gl.glDeleteLists(m_modelDL, 1);
         }
 
         #endregion Private metode

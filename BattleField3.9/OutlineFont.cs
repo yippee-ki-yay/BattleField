@@ -273,7 +273,7 @@ namespace BattleField3._9
         private void Terminate()
         {
             m_font.Dispose();
-           // Gl.glDeleteLists(m_ID, 256);
+            //Gl.glDeleteLists(m_ID, 256);
         }
 
         #endregion IDisposable metode

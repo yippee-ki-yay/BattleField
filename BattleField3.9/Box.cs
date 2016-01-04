@@ -89,47 +89,103 @@ namespace BattleField3._9
 
         #region Metode
 
-        public void Draw()
+        public void Draw(int id)
         {
-            Gl.glBegin(Gl.GL_QUADS);
 
+            //skaliranje texture zemlje
+            Gl.glMatrixMode(Gl.GL_TEXTURE);
+            Gl.glLoadIdentity();
+            Gl.glScalef(6.0f, 6.0f, 6.0f);
+
+            Gl.glMatrixMode(Gl.GL_MODELVIEW);
+
+            Gl.glBindTexture(Gl.GL_TEXTURE_2D, id);
+            Gl.glBegin(Gl.GL_QUADS);
             // Zadnja
+            Gl.glTexCoord2f(0.0f, 0.0f);
             Gl.glVertex3d(-m_width / 2, -m_height / 2, -m_depth / 2);
+
+            Gl.glTexCoord2f(0.0f, 1.0f);
             Gl.glVertex3d(-m_width / 2, m_height / 2, -m_depth / 2);
+
+            Gl.glTexCoord2f(1.0f, 2.0f);
             Gl.glVertex3d(m_width / 2, m_height / 2, -m_depth / 2);
+
+            Gl.glTexCoord2f(1.0f, 0.0f);
             Gl.glVertex3d(m_width / 2, -m_height / 2, -m_depth / 2);
 
             // Desna
+            Gl.glTexCoord2f(0.0f, 0.0f);
             Gl.glVertex3d(m_width / 2, -m_height / 2, -m_depth / 2);
+
+            Gl.glTexCoord2f(0.0f, 1.0f);
             Gl.glVertex3d(m_width / 2, m_height / 2, -m_depth / 2);
+
+            Gl.glTexCoord2f(1.0f, 1.0f);
             Gl.glVertex3d(m_width / 2, m_height / 2, m_depth / 2);
+
+            Gl.glTexCoord2f(1.0f, 0.0f);
             Gl.glVertex3d(m_width / 2, -m_height / 2, m_depth / 2);
 
             // Prednja
+            Gl.glTexCoord2f(0.0f, 0.0f);
             Gl.glVertex3d(m_width / 2, -m_height / 2, m_depth / 2);
+
+            Gl.glTexCoord2f(0.0f, 1.0f);
             Gl.glVertex3d(m_width / 2, m_height / 2, m_depth / 2);
+
+            Gl.glTexCoord2f(1.0f, 1.0f);
             Gl.glVertex3d(-m_width / 2, m_height / 2, m_depth / 2);
+
+            Gl.glTexCoord2f(1.0f, 0.0f);
             Gl.glVertex3d(-m_width / 2, -m_height / 2, m_depth / 2);
 
             // Leva
+            Gl.glTexCoord2f(0.0f, 0.0f);
             Gl.glVertex3d(-m_width / 2, -m_height / 2, m_depth / 2);
+
+            Gl.glTexCoord2f(0.0f, 1.0f);
             Gl.glVertex3d(-m_width / 2, m_height / 2, m_depth / 2);
+
+            Gl.glTexCoord2f(1.0f, 1.0f);
             Gl.glVertex3d(-m_width / 2, m_height / 2, -m_depth / 2);
+
+            Gl.glTexCoord2f(1.0f, 0.0f);
             Gl.glVertex3d(-m_width / 2, -m_height / 2, -m_depth / 2);
 
             // Donja
+            Gl.glTexCoord2f(0.0f, 0.0f);
             Gl.glVertex3d(-m_width / 2, -m_height / 2, -m_depth / 2);
+
+            Gl.glTexCoord2f(0.0f, 1.0f);
             Gl.glVertex3d(m_width / 2, -m_height / 2, -m_depth / 2);
+
+            Gl.glTexCoord2f(1.0f, 1.0f);
             Gl.glVertex3d(m_width / 2, -m_height / 2, m_depth / 2);
+
+            Gl.glTexCoord2f(1.0f, 0.0f);
             Gl.glVertex3d(-m_width / 2, -m_height / 2, m_depth / 2);
 
             // Gornja
+            Gl.glTexCoord2f(0.0f, 0.0f);
             Gl.glVertex3d(-m_width / 2, m_height / 2, -m_depth / 2);
+
+            Gl.glTexCoord2f(0.0f, 1.0f);
             Gl.glVertex3d(-m_width / 2, m_height / 2, m_depth / 2);
+
+            Gl.glTexCoord2f(1.0f, 1.0f);
             Gl.glVertex3d(m_width / 2, m_height / 2, m_depth / 2);
+
+            Gl.glTexCoord2f(1.0f, 0.0f);
             Gl.glVertex3d(m_width / 2, m_height / 2, -m_depth / 2);
 
             Gl.glEnd();
+
+
+            //vracanje na pocetnu matricu za teksture
+            Gl.glMatrixMode(Gl.GL_TEXTURE);
+            Gl.glLoadIdentity();
+            Gl.glMatrixMode(Gl.GL_MODELVIEW);
         }
 
         public void SetSize(double width, double height, double depth)
