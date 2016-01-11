@@ -27,6 +27,10 @@ namespace BattleField3._9
 
         private float rotationX = 0.0f;
         private float rotationY = 0.0f;
+        private float sceneDistance = 0.0f;
+
+        private float tankRotation = 0.0f;
+        private float shipScale = 0.0f;
 
         private bool startAnimation = false;
 
@@ -43,7 +47,8 @@ namespace BattleField3._9
                                  "Prezime: Palinkasevic",
                                  "Sifra zad: 3.9"
                                 };
-
+        private Box b = new Box();
+       
         public float RotationX 
         {
             get { return rotationX; }
@@ -74,6 +79,24 @@ namespace BattleField3._9
             set { startAnimation = value; }
         }
 
+        public float TankRotation
+        {
+            get { return tankRotation; }
+            set { tankRotation = value; }
+        }
+
+        public float ShipScale
+        {
+            get { return shipScale; }
+            set { shipScale = value; }
+        }
+
+        public float SceneDistance
+        {
+            get { return sceneDistance; }
+            set { sceneDistance = value; }
+        }
+
         public MainScene(int width, int height)
         {
 
@@ -90,9 +113,11 @@ namespace BattleField3._9
 
             textureId = new int[textureCount];
 
-            this.Init();
+            this.Init(1.0f, 0.65f, 0.65f, 1.0f);
 
             shipModel = new Ship(textureId[(int)TextureObjects.Metal]);
+
+
 
             this.Resize();
         }
@@ -109,10 +134,10 @@ namespace BattleField3._9
             Gl.glPushMatrix();
 
 
-            Glu.gluLookAt(0.0f, 5.0f, 0.0f, 0.0f, 0.0f, -5.0f, 0.0f, 1.0f, 0.0f);
+            Glu.gluLookAt(1.0f, 5.0f, sceneDistance, 1.0f, 3.0f, -4.0f, 0.0f, 4.0f, 0.0f);
 
             // Pomeraj objekat po z-osi
-            Gl.glTranslatef(0.0f, -1.2f, -5.0f);
+            Gl.glTranslatef(0.0f, 0.0f, -5.0f);
             Gl.glRotatef(RotationX, 1.0f, 0.0f, 0.0f);
             Gl.glRotatef(RotationY, 0.0f, 1.0f, 0.0f);
 
@@ -128,6 +153,7 @@ namespace BattleField3._9
                 Gl.glColor3ub(0, 145, 45); // tamno zeleno
                 Gl.glScalef(0.4f, 0.4f, 0.4f);
                 Gl.glBindTexture(Gl.GL_TEXTURE_2D, textureId[(int)TextureObjects.Sand]);
+                Gl.glNormal3f(0.0f, 1f, 0.0f);
                 Gl.glBegin(Gl.GL_QUADS);
 
                 Gl.glTexCoord2f(0.0f, 0.0f);
@@ -213,15 +239,23 @@ namespace BattleField3._9
             wall3.Draw(textureId[(int)TextureObjects.Brick]);
             Gl.glPopMatrix();
 
+            Gl.glPushMatrix();
+            Gl.glTranslatef(0.0f, 0.0f, -10.0f);
+            b.Draw(textureId[(int)TextureObjects.Brick]);
+            Gl.glPopMatrix();
+            
 
+            tank.Draw(tankRotation);
 
-            tank.Draw();
+            shipModel.Draw(shipScale, startAnimation);
 
-            shipModel.Draw();
+            Gl.glTexEnvi(Gl.GL_TEXTURE_ENV, Gl.GL_TEXTURE_ENV_MODE, Gl.GL_DECAL);
 
             Gl.glPopMatrix();
 
+            Gl.glPushMatrix();
             this.drawTextInfo();
+            Gl.glPopMatrix();
 
             Gl.glFlush();
 
@@ -276,17 +310,19 @@ namespace BattleField3._9
 
         }
 
-        private void Init()
+        public void Init(float r, float g, float b, float a)
         {
-            //postavimo pozadinu belu
-          //  Gl.glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
-            float[] ambLight = { 0.65f, 0.65f, 0.65f, 1.0f };
+
+            float[] ambLight = { r, g, b, a };
             float[] difLight = { 0.6f, 0.6f, 0.6f, 1.0f };
             float[] spcLight = { 0.95f, 0.95f, 0.95f, 1.0f };
-            float[] lightPos = { 0.0f, 0.0f, 100.0f, 1.0f };
+            //zadnja vrednost je 1 pa je reflektorski izvor svetlosti
+            float[] lightPos = { 0.0f, 5.0f, 5.0f, 1.0f };
+
+            float[] lightPosShip = { -5.0f, 0.0f, 0.0f, 1.0f};
 
             //zelena boja za iscrtavanje
-            Gl.glColor3f(0.0f, 1.0f, 0.0f);
+           // Gl.glColor3f(0.0f, 1.0f, 0.0f);
 
             //Ukljucivanje testiranje dubine
             Gl.glEnable(Gl.GL_DEPTH_TEST);
@@ -299,11 +335,14 @@ namespace BattleField3._9
 
             loadTextures();
 
-            // Rad sa osvetljenjem
-            // Ukljuci normalizaciju
-         
-           // Gl.glEnable(Gl.GL_LIGHTING);
-            //Gl.glEnable(Gl.GL_NORMALIZE);
+            //Ukljucimo color tracking mehanizam
+            Gl.glEnable(Gl.GL_COLOR_MATERIAL);
+
+            //definisemo ambijetalnu i difuznu komponentu materijala
+            Gl.glColorMaterial(Gl.GL_FRONT_AND_BACK, Gl.GL_AMBIENT_AND_DIFFUSE);
+
+            Gl.glEnable(Gl.GL_LIGHTING);
+            Gl.glEnable(Gl.GL_NORMALIZE);
 
             // Podesi osvetljenje
             Gl.glLightModelfv(Gl.GL_LIGHT_MODEL_AMBIENT, ambLight);
@@ -311,10 +350,16 @@ namespace BattleField3._9
             Gl.glLightf(Gl.GL_LIGHT0, Gl.GL_SPOT_CUTOFF, 180.0f);
             Gl.glLightfv(Gl.GL_LIGHT0, Gl.GL_POSITION, lightPos);
 
+            Gl.glLightf(Gl.GL_LIGHT1, Gl.GL_SPOT_CUTOFF, 20.0f);
+            Gl.glLightfv(Gl.GL_LIGHT1, Gl.GL_POSITION, lightPosShip);
+
+
             Gl.glLightfv(Gl.GL_LIGHT0, Gl.GL_AMBIENT, ambLight);
+            Gl.glLightfv(Gl.GL_LIGHT1, Gl.GL_AMBIENT, ambLight);
             //Gl.glLightfv(Gl.GL_LIGHT0, Gl.GL_DIFFUSE, difLight);
             //Gl.glLightfv(Gl.GL_LIGHT0, Gl.GL_SPECULAR, spcLight);
             Gl.glEnable(Gl.GL_LIGHT0);
+            Gl.glEnable(Gl.GL_LIGHT1);
         }
 
         public void Resize()
@@ -334,15 +379,15 @@ namespace BattleField3._9
         {
             if(startAnimation == true)
             {
-                if (duration > 50)
+                if (duration > 40)
                 {
                     shipModel.ShootAnimation();
                 }
-                else if (duration < 50 && duration > 30)
+                else if (duration < 40 && duration > 10)
                 {
                     tank.MoveBackAnimation();
                 }
-                else if (duration < 30 && duration > 0)
+                else if (duration < 10 && duration > 0)
                 {
                     tank.FlipAnimation();
                 }
@@ -375,8 +420,8 @@ namespace BattleField3._9
                 Glu.gluBuild2DMipmaps(Gl.GL_TEXTURE_2D, (int)Gl.GL_RGBA8, image.Width, image.Height, Gl.GL_BGRA, Gl.GL_UNSIGNED_BYTE, imageData.Scan0);
 
                 // Podesi parametre teksture
-                Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MIN_FILTER, Gl.GL_NEAREST);
-                Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MAG_FILTER, Gl.GL_NEAREST);
+                Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MIN_FILTER, Gl.GL_LINEAR);
+                Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_MAG_FILTER, Gl.GL_LINEAR);
                 Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_WRAP_S, Gl.GL_REPEAT);
                 Gl.glTexParameteri(Gl.GL_TEXTURE_2D, Gl.GL_TEXTURE_WRAP_T, Gl.GL_REPEAT);
 
@@ -396,6 +441,7 @@ namespace BattleField3._9
             // Oslobodi unmanaged resurse
             tank.Dispose();
             shipModel.Dispose();
+            font.Dispose();
         }
 
         public void Dispose()

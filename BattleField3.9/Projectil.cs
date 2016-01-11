@@ -15,8 +15,8 @@ namespace BattleField3._9
         public Projectil(int id)
         {
             projectile = new Box(2.0f, 0.5f, 1.0f);
-            translateX = 3.34f;
-            translateY = 0.13f;
+            translateX = 6.34f;
+            translateY = 0.16f;
             translateZ = -0.88f;
             this.id = id;
         }
@@ -28,21 +28,26 @@ namespace BattleField3._9
             translateZ = -0.88f;
         }
 
-        public void Draw()
+        public void Draw(bool inAnimation)
         {
-            //projektil
-            Gl.glPushMatrix();
+
+            if(inAnimation)
+            {
+                //projektil
+                Gl.glPushMatrix();
                 Gl.glColor3ub(255, 255, 0);
                 Gl.glTranslatef(translateX, translateY, translateZ);
                 Gl.glRotatef(-10, 0f, 1.0f, 0f);
                 Gl.glScalef(0.2f, 0.07f, 0.05f);
                 projectile.Draw(id);
-            Gl.glPopMatrix();
+                Gl.glPopMatrix();
+            }
+      
         }
 
         public void Move()
         {
-            translateX -= 0.05f;
+            translateX -= 0.15f;
         }
     }
 }

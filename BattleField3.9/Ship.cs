@@ -19,7 +19,10 @@ namespace BattleField3._9
         public Ship(int id)
         {
             shipModel = new AssimpScene(Path.Combine(Path.GetDirectoryName(
-                        Assembly.GetExecutingAssembly().Location), "Resources\\Hamina"), "Hamina.3DS");
+                        Assembly.GetExecutingAssembly().Location), "Resources\\Hamina"), "T-90.obj");
+
+           // shipModel = new AssimpScene(Path.Combine(Path.GetDirectoryName
+           //       (Assembly.GetExecutingAssembly().Location), "Resources\\T-90"), "T-90.3DS");
 
             projectil = new Projectil(id);
 
@@ -35,17 +38,17 @@ namespace BattleField3._9
 
         }
 
-        public void Draw()
+        public void Draw(float scale, bool inAnimation)
         {
             //iscrtavanja broda
             Gl.glPushMatrix();
                 Gl.glTranslatef(translateX, translateY, translateZ);
-                Gl.glScalef(0.02f, 0.02f, 0.02f);
+                Gl.glScalef(0.1f + scale, 0.1f + scale, 0.1f + scale);
                 Gl.glRotatef(rotateDegree, rotateX, rotateY, rotateZ);
                 shipModel.Draw();
             Gl.glPopMatrix();
 
-            projectil.Draw();
+            projectil.Draw(inAnimation);
         }
 
         public void Restore()

@@ -13,7 +13,7 @@ namespace BattleField3._9
     public partial class MainForm : Form
     {
         private MainScene scene = null;
-        private int duration = 90;
+        private int duration = 70;
 
         public MainForm()
         {
@@ -63,8 +63,12 @@ namespace BattleField3._9
                 case Keys.D: scene.RotationY += 5.0f; break;
                 case Keys.F: scene.RotationY -= 5.0f; break;
                 case Keys.H: scene.RotationY += 5.0f; break;
+
+                case Keys.Add: scene.SceneDistance -= 2.0f; scene.Resize(); break;
+                case Keys.Subtract: scene.SceneDistance += 2.0f; scene.Resize(); break;
+
                 case Keys.F5: this.Close(); break;
-                case Keys.C: scene.StartAnimiation = true; duration = 90;
+                case Keys.C: scene.StartAnimiation = true; duration = 70;
                     break;
             }
 
@@ -76,7 +80,49 @@ namespace BattleField3._9
         {
             scene.Animation(duration--);
 
+            if(scene.StartAnimiation)
+            {
+                numericUpDown1.Enabled = false;
+                numericUpDown2.Enabled = false;
+                button1.Enabled = false;
+            }
+            else
+            {
+                numericUpDown1.Enabled = true;
+                numericUpDown2.Enabled = true;
+                button1.Enabled = true;
+            }
+
             openglControl.Refresh();
+        }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+
+            scene.TankRotation = (float)numericUpDown1.Value;
+
+            openglControl.Refresh();
+        }
+
+        private void numericUpDown2_ValueChanged(object sender, EventArgs e)
+        {
+
+            scene.ShipScale = (float)numericUpDown2.Value;
+
+            openglControl.Refresh();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ColorDialog colorDiag = new ColorDialog();
+
+            if(colorDiag.ShowDialog() == DialogResult.OK)
+            {
+                Color c = colorDiag.Color;
+                scene.Init(c.R, c.G, c.B, 1.0f);
+                openglControl.Focus();
+                pictureBox1.BackColor = c;
+            }
         }
     }
 }

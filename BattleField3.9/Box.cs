@@ -92,7 +92,6 @@ namespace BattleField3._9
         public void Draw(int id)
         {
 
-            //skaliranje texture zemlje
             Gl.glMatrixMode(Gl.GL_TEXTURE);
             Gl.glLoadIdentity();
             Gl.glScalef(6.0f, 6.0f, 6.0f);
@@ -102,6 +101,7 @@ namespace BattleField3._9
             Gl.glBindTexture(Gl.GL_TEXTURE_2D, id);
             Gl.glBegin(Gl.GL_QUADS);
             // Zadnja
+            Gl.glNormal3f(0.0f, 0.0f, -1f);
             Gl.glTexCoord2f(0.0f, 0.0f);
             Gl.glVertex3d(-m_width / 2, -m_height / 2, -m_depth / 2);
 
@@ -115,6 +115,7 @@ namespace BattleField3._9
             Gl.glVertex3d(m_width / 2, -m_height / 2, -m_depth / 2);
 
             // Desna
+            Gl.glNormal3f(1f, 0.0f, 0.0f);
             Gl.glTexCoord2f(0.0f, 0.0f);
             Gl.glVertex3d(m_width / 2, -m_height / 2, -m_depth / 2);
 
@@ -128,6 +129,7 @@ namespace BattleField3._9
             Gl.glVertex3d(m_width / 2, -m_height / 2, m_depth / 2);
 
             // Prednja
+            Gl.glNormal3f(0.0f, 0.0f, 1f);
             Gl.glTexCoord2f(0.0f, 0.0f);
             Gl.glVertex3d(m_width / 2, -m_height / 2, m_depth / 2);
 
@@ -141,6 +143,7 @@ namespace BattleField3._9
             Gl.glVertex3d(-m_width / 2, -m_height / 2, m_depth / 2);
 
             // Leva
+            Gl.glNormal3f(-1f, 0.0f, 0.0f);
             Gl.glTexCoord2f(0.0f, 0.0f);
             Gl.glVertex3d(-m_width / 2, -m_height / 2, m_depth / 2);
 
@@ -154,6 +157,7 @@ namespace BattleField3._9
             Gl.glVertex3d(-m_width / 2, -m_height / 2, -m_depth / 2);
 
             // Donja
+            Gl.glNormal3f(0.0f, -1f, 0.0f);
             Gl.glTexCoord2f(0.0f, 0.0f);
             Gl.glVertex3d(-m_width / 2, -m_height / 2, -m_depth / 2);
 
@@ -167,6 +171,7 @@ namespace BattleField3._9
             Gl.glVertex3d(-m_width / 2, -m_height / 2, m_depth / 2);
 
             // Gornja
+            Gl.glNormal3f(0.0f, 1f, 0.0f);
             Gl.glTexCoord2f(0.0f, 0.0f);
             Gl.glVertex3d(-m_width / 2, m_height / 2, -m_depth / 2);
 

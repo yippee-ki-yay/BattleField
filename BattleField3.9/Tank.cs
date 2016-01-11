@@ -32,13 +32,13 @@ namespace BattleField3._9
 
         }
 
-        public void Draw()
+        public void Draw(float rotate)
         {
             //iscrtavanje tenka
             Gl.glPushMatrix();
             Gl.glTranslatef(translateX, translateY, translateZ);
             Gl.glScalef(0.2f, 0.2f, 0.2f);
-            Gl.glRotatef(rotateDegree, rotateX, rotateY, rotateZ);
+            Gl.glRotatef(rotateDegree + rotate, rotateX, rotateY, rotateZ);
             tankModel.Draw();
             Gl.glPopMatrix();
         }
