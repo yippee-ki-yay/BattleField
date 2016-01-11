@@ -24,7 +24,7 @@ namespace BattleField3._9
             translateY = -0.2f;
             translateZ = -1.2f;
 
-            rotateDegree = -100;
+           // rotateDegree = -100;
 
             rotateX = 0.0f;
             rotateY = 1.0f;
@@ -50,8 +50,9 @@ namespace BattleField3._9
 
         public void FlipAnimation()
         {
-            rotateZ = 1;
-            rotateDegree += 0.5f;
+            rotateY = 0.0f;
+            rotateZ = 1.0f;
+            rotateDegree += 15f;
         }
 
         public void Restore()
@@ -60,7 +61,7 @@ namespace BattleField3._9
             translateY = -0.2f;
             translateZ = -1.2f;
 
-            rotateDegree = -100;
+           // rotateDegree = -100;
 
             rotateX = 0.0f;
             rotateY = 1.0f;

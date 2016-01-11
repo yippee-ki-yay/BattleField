@@ -11,6 +11,7 @@ namespace BattleField3._9
         private Box projectile;
         private float translateX, translateY, translateZ;
         private int id;
+        public Boolean Alive{get; set;}
 
         public Projectil(int id)
         {
@@ -23,6 +24,7 @@ namespace BattleField3._9
 
         public void Restore()
         {
+            Alive = true;
             translateX = 3.34f;
             translateY = 0.13f;
             translateZ = -0.88f;
@@ -31,7 +33,7 @@ namespace BattleField3._9
         public void Draw(bool inAnimation)
         {
 
-            if(inAnimation)
+            if(inAnimation && Alive)
             {
                 //projektil
                 Gl.glPushMatrix();

@@ -25,6 +25,7 @@ namespace BattleField3._9
            //       (Assembly.GetExecutingAssembly().Location), "Resources\\T-90"), "T-90.3DS");
 
             projectil = new Projectil(id);
+            projectil.Alive = true;
 
             translateX = 6.0f;
             translateY = 0.0f;
@@ -37,6 +38,9 @@ namespace BattleField3._9
             rotateZ = 0.0f;
 
         }
+
+
+
 
         public void Draw(float scale, bool inAnimation)
         {
@@ -75,6 +79,11 @@ namespace BattleField3._9
         {
             this.Dispose(true);
             GC.SuppressFinalize(this);
+        }
+
+        public void removeProjectil()
+        {
+            projectil.Alive = false;
         }
 
         ~Ship()

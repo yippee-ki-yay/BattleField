@@ -385,11 +385,12 @@ namespace BattleField3._9
                 }
                 else if (duration < 40 && duration > 10)
                 {
+                    shipModel.removeProjectil();
                     tank.MoveBackAnimation();
                 }
                 else if (duration < 10 && duration > 0)
                 {
-                    tank.FlipAnimation();
+                    tank.FlipAnimation();   
                 }
                 else if(duration == 0)
                 {
