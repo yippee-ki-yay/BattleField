@@ -113,7 +113,7 @@ namespace BattleField3._9
 
             textureId = new int[textureCount];
 
-            this.Init(1.0f, 0.65f, 0.65f, 1.0f);
+            this.Init(.2f, 0.2f, 0.2f, 1.0f);
 
             shipModel = new Ship(textureId[(int)TextureObjects.Metal]);
 
@@ -190,6 +190,7 @@ namespace BattleField3._9
                 Gl.glScalef(0.4f, 0.4f, 0.4f);
 
                 Gl.glBindTexture(Gl.GL_TEXTURE_2D, textureId[(int)TextureObjects.Sea]);
+                Gl.glNormal3f(0.0f, 1f, 0.0f);
                 Gl.glBegin(Gl.GL_QUADS);
                     Gl.glTexCoord2f(0.0f, 0.0f);
                     Gl.glVertex3f(10.0f, -0.5f, 10.0f);
@@ -239,12 +240,6 @@ namespace BattleField3._9
             wall3.Draw(textureId[(int)TextureObjects.Brick]);
             Gl.glPopMatrix();
 
-            Gl.glPushMatrix();
-            Gl.glTranslatef(0.0f, 0.0f, -10.0f);
-            b.Draw(textureId[(int)TextureObjects.Brick]);
-            Gl.glPopMatrix();
-            
-
             tank.Draw(tankRotation);
 
             shipModel.Draw(shipScale, startAnimation);
@@ -276,7 +271,7 @@ namespace BattleField3._9
             //predmet
             Gl.glPushMatrix();
             Gl.glTranslatef(0.0f, 4.0f, 0.0f);
-            font.DrawText(text[0]);
+            //font.DrawText(text[0]);
             Gl.glPopMatrix();
 
             //ime
@@ -303,6 +298,8 @@ namespace BattleField3._9
             font.DrawText(text[4]);
             Gl.glPopMatrix();
 
+           
+
             Gl.glLoadIdentity();
             Gl.glMatrixMode(Gl.GL_MODELVIEW);
            
@@ -314,15 +311,13 @@ namespace BattleField3._9
         {
 
             float[] ambLight = { r, g, b, a };
-            float[] difLight = { 0.6f, 0.6f, 0.6f, 1.0f };
-            float[] spcLight = { 0.95f, 0.95f, 0.95f, 1.0f };
+            //float[] ambLight = { 0, 255, 0, a };
+            
+            float[] difLight = { r, g, b, a };
+            //float[] spcLight = { 0.95f, 0.95f, 0.95f, 1.0f };
             //zadnja vrednost je 1 pa je reflektorski izvor svetlosti
-            float[] lightPos = { 0.0f, 5.0f, 5.0f, 1.0f };
-
-            float[] lightPosShip = { -5.0f, 0.0f, 0.0f, 1.0f};
-
-            //zelena boja za iscrtavanje
-           // Gl.glColor3f(0.0f, 1.0f, 0.0f);
+            float[] lightPos = { 0.0f, 3.0f, 0.0f, 1.0f };
+             
 
             //Ukljucivanje testiranje dubine
             Gl.glEnable(Gl.GL_DEPTH_TEST);
@@ -330,6 +325,7 @@ namespace BattleField3._9
             //ukljucimo cull_face ne crta ono nazad
             Gl.glEnable(Gl.GL_CULL_FACE);
 
+            
             Gl.glTexEnvi(Gl.GL_TEXTURE_ENV, Gl.GL_TEXTURE_ENV_MODE, Gl.GL_DECAL);
             Gl.glEnable(Gl.GL_TEXTURE_2D);
 
@@ -350,16 +346,16 @@ namespace BattleField3._9
             Gl.glLightf(Gl.GL_LIGHT0, Gl.GL_SPOT_CUTOFF, 180.0f);
             Gl.glLightfv(Gl.GL_LIGHT0, Gl.GL_POSITION, lightPos);
 
-            Gl.glLightf(Gl.GL_LIGHT1, Gl.GL_SPOT_CUTOFF, 20.0f);
-            Gl.glLightfv(Gl.GL_LIGHT1, Gl.GL_POSITION, lightPosShip);
+            //Gl.glLightf(Gl.GL_LIGHT1, Gl.GL_SPOT_CUTOFF, 180.0f);
+           // Gl.glLightfv(Gl.GL_LIGHT1, Gl.GL_POSITION, lightPosShip);
 
 
             Gl.glLightfv(Gl.GL_LIGHT0, Gl.GL_AMBIENT, ambLight);
-            Gl.glLightfv(Gl.GL_LIGHT1, Gl.GL_AMBIENT, ambLight);
-            //Gl.glLightfv(Gl.GL_LIGHT0, Gl.GL_DIFFUSE, difLight);
+            Gl.glLightfv(Gl.GL_LIGHT0, Gl.GL_DIFFUSE, difLight);
             //Gl.glLightfv(Gl.GL_LIGHT0, Gl.GL_SPECULAR, spcLight);
             Gl.glEnable(Gl.GL_LIGHT0);
-            Gl.glEnable(Gl.GL_LIGHT1);
+           // Gl.glEnable(Gl.GL_LIGHT1);
+             
         }
 
         public void Resize()

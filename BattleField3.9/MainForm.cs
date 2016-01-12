@@ -55,17 +55,73 @@ namespace BattleField3._9
         {
             switch(e.KeyCode)
             {
-                case Keys.W: scene.RotationX -= 5.0f; break;
-                case Keys.S: scene.RotationX += 5.0f; break;
-                case Keys.T: scene.RotationX -= 5.0f; break;
-                case Keys.G: scene.RotationX += 5.0f; break;
+
+                case Keys.W:
+                    {
+                        if (scene.RotationX > -30.0f)
+                        {
+                            scene.RotationX -= 5.0f;
+                        }
+                      
+                    }
+                    break;
+
+
+                case Keys.S: 
+                    {
+                        if (scene.RotationX < 125.0f)
+                        {
+                            scene.RotationX += 5.0f;
+                        }
+                    }
+                    break;
+
+                case Keys.T:
+                    {
+                        if (scene.RotationX > -30.0f)
+                        {
+                            scene.RotationX -= 5.0f;
+                        }
+
+                    }
+                    break;
+
+
+                case Keys.G:
+                    {
+                        if (scene.RotationX < 125.0f)
+                        {
+                            scene.RotationX += 5.0f;
+                        }
+                    }
+                    break;
+                
+
+
                 case Keys.A: scene.RotationY -= 5.0f; break;
                 case Keys.D: scene.RotationY += 5.0f; break;
                 case Keys.F: scene.RotationY -= 5.0f; break;
                 case Keys.H: scene.RotationY += 5.0f; break;
 
-                case Keys.Add: scene.SceneDistance -= 2.0f; scene.Resize(); break;
-                case Keys.Subtract: scene.SceneDistance += 2.0f; scene.Resize(); break;
+                case Keys.Add:
+                    {
+                        if(scene.SceneDistance < 10.0f)
+                        {
+                            scene.SceneDistance += 0.5f;
+                            scene.Resize();
+                        }
+                       
+                    }
+                    break;
+                case Keys.Subtract:
+                    {
+                        if(scene.SceneDistance > 0.0f)
+                        {
+                            scene.SceneDistance -= 0.5f; scene.Resize();
+                        }
+                       
+                    }
+                    break;
 
                 case Keys.F5: this.Close(); break;
                 case Keys.C: scene.StartAnimiation = true; duration = 70;
@@ -120,6 +176,7 @@ namespace BattleField3._9
             {
                 Color c = colorDiag.Color;
                 scene.Init(c.R, c.G, c.B, 1.0f);
+                scene.Draw();
                 openglControl.Focus();
                 pictureBox1.BackColor = c;
             }

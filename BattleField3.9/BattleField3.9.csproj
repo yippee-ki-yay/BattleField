@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssimpScene.cs" />
+    <Compile Include="AssimpSceneOld.cs" />
     <Compile Include="Box.cs" />
     <Compile Include="IDrawable.cs" />
     <Compile Include="MainForm.cs">

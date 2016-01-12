@@ -10,14 +10,14 @@ namespace BattleField3._9
 {
     class Tank
     {
-        private AssimpScene tankModel;
+        private AssimpSceneOld tankModel;
 
         private float translateX, translateY, translateZ;
         private float rotateDegree, rotateX, rotateY, rotateZ;
 
         public Tank()
         {
-            tankModel = new AssimpScene(Path.Combine(Path.GetDirectoryName
+            tankModel = new AssimpSceneOld(Path.Combine(Path.GetDirectoryName
                   (Assembly.GetExecutingAssembly().Location), "Resources\\T-90"), "T-90.3DS");
 
             translateX = 1.5f;
@@ -34,12 +34,15 @@ namespace BattleField3._9
 
         public void Draw(float rotate)
         {
+
             //iscrtavanje tenka
             Gl.glPushMatrix();
-            Gl.glTranslatef(translateX, translateY, translateZ);
-            Gl.glScalef(0.2f, 0.2f, 0.2f);
-            Gl.glRotatef(rotateDegree + rotate, rotateX, rotateY, rotateZ);
-            tankModel.Draw();
+            Gl.glTexEnvi(Gl.GL_TEXTURE_ENV, Gl.GL_TEXTURE_ENV_MODE, Gl.GL_ADD);
+                Gl.glTranslatef(translateX, translateY, translateZ);
+                Gl.glScalef(0.2f, 0.2f, 0.2f);
+                Gl.glRotatef(rotateDegree + rotate, rotateX, rotateY, rotateZ);
+                tankModel.Draw();
+            Gl.glTexEnvi(Gl.GL_TEXTURE_ENV, Gl.GL_TEXTURE_ENV_MODE, Gl.GL_DECAL);
             Gl.glPopMatrix();
         }
 
@@ -61,7 +64,7 @@ namespace BattleField3._9
             translateY = -0.2f;
             translateZ = -1.2f;
 
-           // rotateDegree = -100;
+             rotateDegree = 0;
 
             rotateX = 0.0f;
             rotateY = 1.0f;

@@ -25,8 +25,8 @@ namespace BattleField3._9
         public void Restore()
         {
             Alive = true;
-            translateX = 3.34f;
-            translateY = 0.13f;
+            translateX = 6.34f;
+            translateY = 0.16f;
             translateZ = -0.88f;
         }
 
