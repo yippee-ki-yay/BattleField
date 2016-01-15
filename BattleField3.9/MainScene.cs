@@ -113,7 +113,7 @@ namespace BattleField3._9
 
             textureId = new int[textureCount];
 
-            this.Init(.2f, 0.2f, 0.2f, 1.0f);
+            this.Init(0.2f, 0.2f, 0.2f, 1.0f);
 
             shipModel = new Ship(textureId[(int)TextureObjects.Metal]);
 
@@ -439,6 +439,7 @@ namespace BattleField3._9
             tank.Dispose();
             shipModel.Dispose();
             font.Dispose();
+            Gl.glDeleteTextures(textureCount, textureId);
         }
 
         public void Dispose()
